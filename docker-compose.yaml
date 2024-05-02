@@ -1,0 +1,22 @@
+version: '1'
+# each service is a different container web: nodejs app, db: mysql database
+services:
+  web:
+    # point to correct Dockerfile
+    build: .
+    # add port configuration
+    ports:
+      - "8080:8080"
+  db:
+    image: "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db-data:/foo
+
+# store db data across multiple containers
+volumes:
+  db-data:
+
+    # run containers: docker composer up
+    # shut down containers docker composer down
